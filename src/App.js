@@ -1,24 +1,25 @@
-import logo from './logo.svg';
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import Header from './components/Header';
+import AccueilScreen from './screens/AccueilScreen';
+import ConnexionScreen from './screens/ConnexionScreen';
+import InscriptionScreen from './screens/InscriptionScreen';
+import ProfileScreen from './screens/ProfileScreen';
+import ProtectedRoute from './routing/ProtectedRoute';
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Header/>
+        <Routes>
+            <Route path='/' element={<AccueilScreen />}/>
+            <Route path='/connexion' element={<ConnexionScreen />}/>
+            <Route path='/inscription' element={<InscriptionScreen />}/>
+            <Route element={<ProtectedRoute/>}>
+              <Route path='/profile' element={<ProfileScreen />}/>
+            </Route>
+        </Routes>
+    </BrowserRouter>
   );
 }
 
